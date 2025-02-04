@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine?</title>
+  <style>
+    body {
+      font-family: 'Pacifico', cursive, Arial, sans-serif;
+      background-color: #ffebee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative; /* For positioning the audio button */
+    }
+    .container {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      width: 100%;
+    }
+    h1 {
+      color: #d32f2f;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .section {
+      display: none;
+      margin-top: 20px;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .option-card {
+      border: 2px solid #ffb3b3;
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .option-card:hover {
+      transform: scale(1.05);
+      background-color: #fff5f5;
+    }
+    .option-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .option-card.selected {
+      border-color: #d32f2f;
+      background-color: #ffebee;
+    }
+    #finalPage {
+      padding: 20px;
+    }
+    #finalImage {
+      width: 600px;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 20px auto;
+      /* Replace with your image URL */
+      background-image: url('https://via.placeholder.com/300x300?text=Our+Photo');
+      background-size: cover;
+    }
+
+    /* Audio button styling */
+    #audioControl {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Pacifico', cursive;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Audio element -->
+  <audio id="backgroundAudio" loop>
+    <source src="song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Audio control button -->
+  <button id="audioControl">Play Me</button>
+
+  <div class="container">
+    <!-- Initial Question -->
+    <div id="initialQuestion" class="active">
+      <h1>Will you be my Valentine?</h1>
+      <button id="yesButton">Yes</button>
+      <button id="noButton">No</button>
+    </div>
+
+    <!-- Date Selection -->
+    <div id="dateSection" class="section">
+      <h1>Thank you Boo!, I love you so much! 💖</h1>
+      <label>When are you free bebe???</label>
+      <input type="date" id="dateInput">
+      <button id="submitDate">Submit</button>
+    </div>
+
+    <!-- Food Selection -->
+    <div id="foodSection" class="section">
+      <h1>What should we eat?</h1>
+      <div class="options-grid" id="foodOptions">
+        <!-- Add food images here -->
+        <div class="option-card" data-food="Pasta">
+          <img src="pasta.jpg" alt="Pasta">
+          <div>Pasta</div>
+        </div>
+        <div class="option-card" data-food="Korean Food">
+          <img src="korean.jpg" alt="Korean Food">
+          <div>Korean Food</div>
+        </div>
+        <div class="option-card" data-food="Pizza">
+          <img src="pizza.jpg" alt="Pizza">
+          <div>Pizza</div>
+        </div>
+        <div class="option-card" data-food="Fries">
+          <img src="fries.jpg" alt="Fries">
+          <div>Fries</div>
+        </div>
+        <div class="option-card" data-food="Buldak Noodles">
+          <img src="buldak.jpg" alt="Buldak Noodles">
+          <div>Buldak Noodles</div>
+        </div>
+        <div class="option-card" data-food="Boo">
+          <img src="rizz.jpg" alt="Boo">
+          <div>Boo</div>
+        </div>
+      </div>
+      <button id="submitFood">Submit</button>
+    </div>
+
+    <!-- Activity Selection -->
+    <div id="activitySection" class="section">
+      <h1>What should we do after?</h1>
+      <div class="options-grid" id="activityOptions">
+        <!-- Add activity images here -->
+        <div class="option-card" data-activity="Bahay">
+          <img src="bahay.jpg" alt="Bahay">
+          <div>Bahay</div>
+        </div>
+        <div class="option-card" data-activity="Cinema">
+          <img src="cinema.jpg" alt="Cinema">
+          <div>Cinema</div>
+        </div>
+        <div class="option-card" data-activity="Arcade">
+          <img src="arcade.jpg" alt="Arcade">
+          <div>Arcade</div>
+        </div>
+        <div class="option-card" data-activity="Kape">
+          <img src="kape.jpg" alt="Kape">
+          <div>Kape</div>
+        </div>
+        <div class="option-card" data-activity="Woohoo">
+          <img src="woohoo.jpg" alt="Woohoo">
+          <div>Woohoo</div>
+        </div>
+		<div class="option-card" data-activity="Kiss">
+          <img src="kiss.jpg" alt="Kiss">
+          <div>Kiss</div>
+        </div>
+      </div>
+      <button id="submitActivity">Submit</button>
+    </div>
+
+    <!-- Final Page -->
+    <div id="finalPage" class="section">
+      <h1>Thank you for being the best and prettiest girlfriend in the world! ❤️</h1>
+      <div id="finalImage">
+	  <img src="infin.jpg" alt="Kiss">
+	  </div>
+      <h2>I love you always bebe see you soon</h2>
+    </div>
+  </div>
+
+  <script>
+    // DOM Elements
+    const sections = document.querySelectorAll('.section');
+    const noButton = document.getElementById('noButton');
+    const yesButton = document.getElementById('yesButton');
+    const dateInput = document.getElementById('dateInput');
+    const audioControl = document.getElementById('audioControl');
+    const backgroundAudio = document.getElementById('backgroundAudio');
+
+    // Progress through sections
+    let currentSection = 'initialQuestion';
+
+    // No button animation
+    noButton.addEventListener('mouseover', moveButton);
+
+    // Yes button click
+    yesButton.addEventListener('click', () => {
+      document.getElementById('initialQuestion').style.display = 'none'; // Hide initial question
+      showSection('dateSection');
+    });
+
+    // Date submission
+    document.getElementById('submitDate').addEventListener('click', () => {
+      if (dateInput.value) showSection('foodSection');
+      else alert("Please choose a date!");
+    });
+
+    // Food selection
+    document.getElementById('submitFood').addEventListener('click', () => {
+      showSection('activitySection');
+    });
+
+    // Activity selection
+    document.getElementById('submitActivity').addEventListener('click', () => {
+      showSection('finalPage');
+    });
+
+    // Function to show sections
+    function showSection(sectionId) {
+      document.getElementById(currentSection).classList.remove('active');
+      document.getElementById(sectionId).classList.add('active');
+      currentSection = sectionId;
+    }
+
+    // Function to move No button
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noButton.style.position = 'fixed';
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    }
+
+    // Add selection functionality
+    document.querySelectorAll('.option-card').forEach(card => {
+      card.addEventListener('click', function() {
+        this.classList.toggle('selected');
+      });
+    });
+
+    // Audio control functionality
+    audioControl.addEventListener('click', () => {
+      if (backgroundAudio.paused) {
+        backgroundAudio.play();
+        audioControl.textContent = "Pause Me";
+      } else {
+        backgroundAudio.pause();
+        audioControl.textContent = "Play Me";
+      }
+    });
+  </script>
+</body>
+</html>
